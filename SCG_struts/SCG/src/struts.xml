@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<default-action-ref name="index" />
+
+		<global-results>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+		<action name="index">
+			<result type="redirectAction">
+				<param name="actionName">error</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+	</package>
+	<package name="controladores" namespace="/" extends="struts-default">
+		<action name="Home" class="controladores.HomeAction" method="conectar">
+			<result name="success">
+				/Vistas/Home.jsp
+				<param name="salida"></param>
+			</result>
+		</action>
+		<action name="Login" class="controladores.UsuarioAction" method="login">
+			<result name="success">
+				/Vistas/Usuario/login.jsp
+			</result>
+		</action>
+		<action name="Logout" class="controladores.UsuarioAction" method="logout">
+			<result name="success">
+				/Vistas/Usuario/logout.jsp
+			</result>
+		</action>
+		<action name="Dashboard" class="controladores.DashboardAction" method="index">
+			<result name="success">
+				/admin/index.jsp
+			</result>
+		</action>
+		<action name="Movimientos" class="controladores.MovimientosAction" method="index">
+			<result name="success">
+				/admin/movimientos.jsp
+			</result>
+		</action>
+		<action name="Transferencias" class="controladores.TransferenciasAction" method="index">
+			<result name="success">
+				/admin/transferencias.jsp
+			</result>
+		</action>
+		<action name="Gastos" class="controladores.GastosAction" method="index">
+			<result name="success">
+				/admin/gastos.jsp
+			</result>
+		</action>
+		<action name="ajax_movimientos_listar_all" class="controladores.MovimientosAction" method="getListarAll">
+			<result name="success">
+				/admin/movimientos/listar_all.jsp
+			</result>
+		</action>
+		<action name="ajax_movimientos_buscar" class="controladores.MovimientosAction" method="getBuscar">
+			<result name="success">
+				/admin/movimientos/buscar.jsp
+			</result>
+		</action>
+		<action name="ajax_movimiento_nuevo" class="controladores.MovimientoNuevoAction" method="nuevo">
+			<result name="success">
+				/admin/movimientos/nuevo.jsp
+			</result>
+		</action>
+	</package>
+	<include file="example.xml" />
+
+	<!-- Add packages here -->
+
+</struts>
