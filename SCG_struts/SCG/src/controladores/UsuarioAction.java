@@ -19,6 +19,10 @@ public class UsuarioAction extends ActionSupport {
 
 	private int idusuario;
 	private int idpersonal;
+	private String nombres;
+	private String apellidos;
+	private String dni;
+	private String email;
 	private String login;
 	private String clave;
 	private int idrol;
@@ -57,6 +61,38 @@ public class UsuarioAction extends ActionSupport {
 
 	public void setIdpersonal(int idpersonal) {
 		this.idpersonal = idpersonal;
+	}	
+
+	public String getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getLogin() {
@@ -109,6 +145,8 @@ public class UsuarioAction extends ActionSupport {
 			session.put("login",obj_usuario.getLogin());
 			session.put("usuario",obj_usuario);
 			session.put("personal",obj_usuario.getPersonal());
+			session.put("iduunn",obj_usuario.getPersonal().getIduunn());
+			session.put("unidad_negocio",obj_usuario.getPersonal().getGestiona_unidadnegocio());
 			session.put("parametro",obj_usuario.getParametro());
 		}else{
 			this.codigo = "FALSE";
@@ -122,8 +160,106 @@ public class UsuarioAction extends ActionSupport {
 		System.out.println("Estoy en logout");
 		
 		Map session = ActionContext.getContext().getSession();
-		session = null;
+		session.remove("login_connect");
 		
+		return SUCCESS;
+	}
+	
+	public String index() {
+		System.out.println("Estoy en index");
+
+		return SUCCESS;
+	}
+	
+	public String getListarAll() {
+		System.out.println("Estoy en getListarAll");
+		
+		GestionaUsuario gestion_usuario = new GestionaUsuario();
+		Map session = ActionContext.getContext().getSession();
+		gestion_usuario.setIduunn((int) session.get("iduunn"));
+		this.mensaje = gestion_usuario.getMensaje();
+
+		return SUCCESS;
+	}
+	
+	public String getBuscar() {
+		System.out.println("Estoy en getBuscar");
+		
+		GestionaUsuario gestion_usuario = new GestionaUsuario();
+		gestion_usuario.setCodigo(this.codigo);
+		Map session = ActionContext.getContext().getSession();
+		gestion_usuario.setIduunn((int) session.get("iduunn"));
+		this.mensaje = gestion_usuario.getMensaje();
+
+		return SUCCESS;
+	}
+	
+	public String nuevo() {
+		System.out.println("Estoy en nuevo");
+
+		return SUCCESS;
+	}
+	
+	public String save() {
+		System.out.println("Estoy en nuevo");
+		
+		GestionaUsuario gestion_usuario = new GestionaUsuario();
+		gestion_usuario.setCodigo(this.codigo);
+		gestion_usuario.setNombres(this.nombres);
+		gestion_usuario.setApellidos(this.apellidos);
+		gestion_usuario.setDni(this.dni);
+		gestion_usuario.setEmail(this.email);
+		gestion_usuario.setLogin(this.login);
+		gestion_usuario.setClave(this.clave);
+		Map session = ActionContext.getContext().getSession();
+		gestion_usuario.setIduunn((int) session.get("iduunn"));
+		this.mensaje = gestion_usuario.getMensaje();
+
+		return SUCCESS;
+	}
+	
+	public String actualizar() {
+		System.out.println("Estoy en actualizar idusuario="+this.idusuario);
+		GestionaUsuario obj_usuario = new GestionaUsuario();
+		GestionaUsuario gestion_usuario = obj_usuario.getById(this.idusuario);
+		this.idpersonal = gestion_usuario.getIdpersonal();
+		this.nombres = gestion_usuario.getNombres();
+		this.apellidos = gestion_usuario.getApellidos();
+		this.dni = gestion_usuario.getDni();
+		this.email = gestion_usuario.getEmail();
+		this.login = gestion_usuario.getLogin();
+		this.clave = gestion_usuario.getClave();
+
+		return SUCCESS;
+	}
+	
+	public String update() {
+		System.out.println("Estoy en actualizar");
+		
+		GestionaUsuario gestion_usuario = new GestionaUsuario();
+		gestion_usuario.setCodigo(this.codigo);
+		gestion_usuario.setIdusuario(this.idusuario);
+		gestion_usuario.setNombres(this.nombres);
+		gestion_usuario.setApellidos(this.apellidos);
+		gestion_usuario.setDni(this.dni);
+		gestion_usuario.setEmail(this.email);
+		gestion_usuario.setLogin(this.login);
+		gestion_usuario.setClave(this.clave);
+		Map session = ActionContext.getContext().getSession();
+		gestion_usuario.setIduunn((int) session.get("iduunn"));
+		this.mensaje = gestion_usuario.getMensaje();
+
+		return SUCCESS;
+	}
+	
+	public String eliminar() {
+		System.out.println("Estoy en eliminar");
+		
+		GestionaUsuario gestion_usuario = new GestionaUsuario();
+		gestion_usuario.setCodigo("ELIMINAR");
+		gestion_usuario.setIdusuario(this.idusuario);
+		this.mensaje = gestion_usuario.getMensaje();
+
 		return SUCCESS;
 	}
 

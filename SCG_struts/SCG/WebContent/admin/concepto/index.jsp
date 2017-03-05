@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
-<jsp:include page="./login_check.jsp" />
+<jsp:include page="../login_check.jsp" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,29 +24,34 @@
 
 	<div id="wrapper">
 
-		<s:set var="menu_left_activo" value="%{'gastos'}" />
-		<jsp:include page="menu/menu_left.jsp" />
+		<s:set var="menu_left_activo" value="%{'concepto'}" />
+		<jsp:include page="../menu/menu_left.jsp" />
+		
 
 		<div id="page-wrapper" class="gray-bg">
-			<jsp:include page="menu/menu_top.jsp" />
+			<jsp:include page="../menu/menu_top.jsp" />
 			
 			<div class="row wrapper border-bottom white-bg page-heading">
 				<div class="col-lg-10">
-					<h2>Gastos</h2>
+					<h2>Conceptos</h2>
 					<ol class="breadcrumb">
 						<li><a href="index.jsp">Inicio</a></li>
-						<li class="active"><strong>Gastos</strong></li>
+						<li class="active"><strong>Conceptos</strong></li>
 					</ol>
 				</div>
-				<div class="col-lg-2"></div>
+				<div class="col-lg-2 text-right">
+				<h2>
+				<s:a action="ConceptoNuevo" class="btn btn-primary">Nuevo</s:a>
+				</h2>
+				</div>
 			</div>
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-12" id="contenedor_respuesta">
 
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>Gastos</h5>
+								<h5>Conceptos</h5>
 								<div class="ibox-tools">
 									<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
 									</a> <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -63,14 +68,14 @@
 							<div class="ibox-content">
 								<div class="row">
 									<div class="form-group">
-										<div class="col-sm-12" id="contenedor_respuesta">
+										<div class="col-sm-12">
 
 											<div class="input-group">
 												<input type="text" id="txt_buscar" name="txt_buscar" placeholder="Buscar"
 													class="input-sm form-control"> <span
 													class="input-group-btn">
 													<button type="button" id="btn_buscar" class="btn btn-sm btn-primary">
-														Buscar!</button>
+														Buscar</button>
 												</span>
 											</div>
 
@@ -84,13 +89,8 @@
 										<thead>
 											<tr>
 												<th>C&oacute;digo</th>
-												<th>Tipo</th>
-												<th>Fecha</th>
-												<th>Concepto</th>
-												<th>Importe</th>
-												<th>Asignado a</th>
-												<th>Tipo Doc. Ref.</th>
-												<th>Nro Doc. Ref.</th>
+												<th>Nombre</th>
+												<th>Descripcion</th>
 												<th>Acción</th>
 											</tr>
 										</thead>
@@ -146,7 +146,7 @@
 			$("#btn_buscar").click(function(){
 				if($.trim($('#txt_buscar').val())==''){
 					$.ajax({
-					   url:'ajax_movimientos_listar_all'
+					   url:'ajax_conceptos_listar_all'
 					}).done(function(data) {
 						  $('#contenedor_tabla').html(data);
 						  
@@ -154,7 +154,7 @@
 					});	
 				}else{
 					$.ajax({
-					   url:'ajax_movimientos_buscar',
+					   url:'ajax_conceptos_buscar',
 					   data:'codigo='+$('#txt_buscar').val()
 					}).done(function(data) {
 						  $('#contenedor_tabla').html(data);
@@ -167,14 +167,18 @@
 			$("#btn_buscar").click();
 			
 			function eventos(){
+				$(".btn_editar").click(function(){
+					console.log('ConceptoActualizar?idconcepto='+$(this).data('id'));
+					window.open('ConceptoActualizar?idconcepto='+$(this).data('id'),'_self');
+				});
 				$(".btn_eliminar").click(function(){
-					if(confirm('Esta seguro que desea eliminar el movimiento?')){
+					if(confirm('Esta seguro que desea eliminar el concepto?')){
 						$.ajax({
-						   url:'ajax_movimiento_eliminar',
+						   url:'ajax_concepto_eliminar',
 						   method:'POST',
 						   data:{
 							   	'codigo':'ELIMINAR',
-							   	'idmovimiento':$(this).data('id')
+							   	'idconcepto':$(this).data('id')
 						   }
 						}).done(function(data) {
 							  $('#contenedor_respuesta').html(data);

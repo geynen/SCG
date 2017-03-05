@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nuevo Movimiento</title>
+<title>Eliminar Concepto</title>
 </head>
 <body>
 <s:property value="mensaje" escape="false"/>
 <br>
-<s:a action="Movimientos">Registrar otro movimiento</s:a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<s:a action="Gastos">Ir a listado</s:a>
+<s:a action="ConceptoNuevo">Registrar otro concepto</s:a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<s:a action="Conceptos">Ir a listado</s:a>
 </body>
 </html>

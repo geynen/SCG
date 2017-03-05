@@ -29,6 +29,8 @@ public class GestionaMovimientos implements Serializable {
 			// NuevoProducto();
 			// NuevoProducto2();
 			nuevoMovimiento();
+		} else if (this.codigo.equals("ELIMINAR")) {
+			eliminarMovimiento();
 		} else if (this.codigo.equals("TRANSFERIR")) {
 			nuevaTransferencia();
 		} else if (this.codigo != "") {
@@ -184,26 +186,31 @@ public class GestionaMovimientos implements Serializable {
 					"inner join concepto c on m.idconcepto=c.idconcepto "+
 					"left join personal pe on m.idpersonal=pe.idpersonal "+
 					"left join parametro pa on m.idtipodocumento=pa.idparametro "+
-					"where m.codigo='" + codigo + "'");
+					"where m.idestado=1 and m.codigo='" + codigo + "' "+
+					"and m.iduunn="+this.iduunn+" order by m.fecha desc, m.idmovimiento desc");
 			
 			mensaje += "<table class=\"table table-striped\">" + "<thead>" + "<tr>" + "<th>C&oacute;digo</th>"
 					+ "<th>Tipo</th>" + "<th>Fecha</th>" + "<th>Concepto</th>" + "<th>Importe</th>"
-					+ "<th>Asignado a</th>" + "<th>Tipo Doc. Ref.</th>" + "<th>Nro Doc. Ref.</th>" + "<th>Acción</th>"
+					+ "<th>Asignado a</th>" + "<th>Tipo Doc. Ref.</th>" + "<th>Nro Doc. Ref.</th>" + "<th>Observaci&oacute;n</th>" + "<th>Acción</th>"
 					+ "</tr>" + "</thead>" + "<tbody>";
 
 			while (rs.next()) {
+				String str_observacion = rs.getString("observacion");
+				if(str_observacion==null){
+					str_observacion = "";
+				}
 				mensaje += "<tr>" + "<td>" + rs.getString("codigo") + "</td>" + "<td>" + rs.getString("tipomovimiento") + "</td>" + "<td>"
 						+ rs.getString("fecha").substring(0,10) + "</td>" + "<td>" + rs.getString("concepto") + "</td>" + "<td>S/. "
 						+ rs.getString("total") + "</td>" + "<td>" + rs.getString("personal") + "</td>" + "<td>" + rs.getString("tipodocumento") + "</td>"
-						+ "<td>" + rs.getString("nrodocumento") + "</td>" + "<td>"
-						+ "<button type=\"button\" class=\"btn btn-white btn-sm anular\""
-						+ "	data-val=\"\" data-tooltip=\"tooltip\" data-placement=\"top\"" + "	title=\"Anular\">"
-						+ "	<i class=\"fa fa-times-circle-o\"></i>" + "</button>" + "<button type=\"button\""
-						+ "	class=\"btn btn-white btn-sm verdetalle\""
-						+ "	data-tooltip=\"tooltip\" data-placement=\"top\"" + "	title=\"Ver Detalle\">"
-						+ "	<i class=\"fa fa-eye\"></i>" + "</button>" + "</td>" + "</tr>";
+						+ "<td>" + rs.getString("nrodocumento") + "</td>" + "<td>" + str_observacion+ "</td>"
+						+ "<td>" + "<button type=\"button\" class=\"btn btn-white btn-sm btn_eliminar\""
+						+ "	data-tooltip=\"tooltip\" data-placement=\"top\"" + " title=\"Eliminar\" data-id=\"" + rs.getString("idmovimiento") + "\">"
+						+ "	<i class=\"fa fa-remove\"></i>" + "</button>" + "</td>"
+						+ "</tr>";
 			}
 			mensaje += "</tbody></table>";
+			rs.last();
+			mensaje += "Cantidad de registros encontrados: "+rs.getRow();
 			rs.close();
 			st.close();
 			conex.close();
@@ -227,26 +234,31 @@ public class GestionaMovimientos implements Serializable {
 					"from movimiento m inner join parametro p on m.idtipomovimiento=p.idparametro "+
 					"inner join concepto c on m.idconcepto=c.idconcepto "+
 					"left join personal pe on m.idpersonal=pe.idpersonal "+
-					"left join parametro pa on m.idtipodocumento=pa.idparametro order by m.fecha desc, m.idmovimiento desc");
+					"left join parametro pa on m.idtipodocumento=pa.idparametro "+
+					"where m.idestado=1 and m.iduunn="+this.iduunn+" order by m.fecha desc, m.idmovimiento desc");
 			
 			mensaje += "<table class=\"table table-striped\">" + "<thead>" + "<tr>" + "<th>C&oacute;digo</th>"
 					+ "<th>Tipo</th>" + "<th>Fecha</th>" + "<th>Concepto</th>" + "<th>Importe</th>"
-					+ "<th>Asignado a</th>" + "<th>Tipo Doc. Ref.</th>" + "<th>Nro Doc. Ref.</th>" + "<th>Acción</th>"
+					+ "<th>Asignado a</th>" + "<th>Tipo Doc. Ref.</th>" + "<th>Nro Doc. Ref.</th>" + "<th>Observaci&oacute;n</th>" + "<th>Acción</th>"
 					+ "</tr>" + "</thead>" + "<tbody>";
 
 			while (rs.next()) {
+				String str_observacion = rs.getString("observacion");
+				if(str_observacion==null){
+					str_observacion = "";
+				}
 				mensaje += "<tr>" + "<td>" + rs.getString("codigo") + "</td>" + "<td>" + rs.getString("tipomovimiento") + "</td>" + "<td>"
 						+ rs.getString("fecha").substring(0,10) + "</td>" + "<td>" + rs.getString("concepto") + "</td>" + "<td>S/. "
 						+ rs.getString("total") + "</td>" + "<td>" + rs.getString("personal") + "</td>" + "<td>" + rs.getString("tipodocumento") + "</td>"
-						+ "<td>" + rs.getString("nrodocumento") + "</td>" + "<td>"
-						+ "<button type=\"button\" class=\"btn btn-white btn-sm anular\""
-						+ "	data-val=\"\" data-tooltip=\"tooltip\" data-placement=\"top\"" + "	title=\"Anular\">"
-						+ "	<i class=\"fa fa-times-circle-o\"></i>" + "</button>" + "<button type=\"button\""
-						+ "	class=\"btn btn-white btn-sm verdetalle\""
-						+ "	data-tooltip=\"tooltip\" data-placement=\"top\"" + "	title=\"Ver Detalle\">"
-						+ "	<i class=\"fa fa-eye\"></i>" + "</button>" + "</td>" + "</tr>";
+						+ "<td>" + rs.getString("nrodocumento") + "</td>" + "<td>" + str_observacion + "</td>"
+						+ "<td>" + "<button type=\"button\" class=\"btn btn-white btn-sm btn_eliminar\""
+						+ "	data-tooltip=\"tooltip\" data-placement=\"top\"" + " title=\"Eliminar\" data-id=\"" + rs.getString("idmovimiento") + "\">"
+						+ "	<i class=\"fa fa-remove\"></i>" + "</button>" + "</td>"
+						+ "</tr>";
 			}
 			mensaje += "</tbody></table>";
+			rs.last();
+			mensaje += "Cantidad de registros encontrados: "+rs.getRow();
 			rs.close();
 			st.close();
 			conex.close();
@@ -265,17 +277,18 @@ public class GestionaMovimientos implements Serializable {
 			GestionBaseDeDatos gestor = new GestionBaseDeDatos();
 			Connection conex = gestor.conectar();
 			mensaje = gestor.getMensaje();
-			CallableStatement cs = conex.prepareCall("CALL spMovimientoAdd(?,?,?,?,?,?,?,?,?,?)");
-			cs.setInt(1, this.idtipo);
-			cs.setInt(2, this.idconcepto);
-			cs.setString(3, this.fecha);
-			cs.setInt(4, this.idusuario);
-			cs.setInt(5, this.idpersonal);
-			cs.setDouble(6, this.importe);
-			cs.setInt(7, this.idtipodocref);
-			cs.setString(8, this.nrodocref);
-			cs.setString(9, this.observacion);
-			cs.registerOutParameter(10, Types.CHAR, "var_codigo");
+			CallableStatement cs = conex.prepareCall("CALL spMovimientoAdd(?,?,?,?,?,?,?,?,?,?,?)");
+			cs.setInt(1, this.iduunn);
+			cs.setInt(2, this.idtipo);
+			cs.setInt(3, this.idconcepto);
+			cs.setString(4, this.fecha);
+			cs.setInt(5, this.idusuario);
+			cs.setInt(6, this.idpersonal);
+			cs.setDouble(7, this.importe);
+			cs.setInt(8, this.idtipodocref);
+			cs.setString(9, this.nrodocref);
+			cs.setString(10, this.observacion);
+			cs.registerOutParameter(11, Types.CHAR, "var_codigo");
 			
 			System.out.println("QUERY:"+cs.toString());
 			
@@ -283,9 +296,9 @@ public class GestionaMovimientos implements Serializable {
 
 			if (rs.next()) {
 				// Forma de acceder: rs.getString(1)+"/"+rs.getString("var_codigo");
-				mensaje += "Se inserto Correctamente.<br>Su código de movimiento es:" + rs.getString("var_codigo");
+				mensaje += "Se inserto Correctamente.<br>Su código de movimiento es: " + rs.getString("var_codigo");
 			} else {
-				mensaje += "Ocurrio un error al registrar el nuevo producto.";
+				mensaje += "Ocurrio un error al registrar el nuevo movimiento.";
 			}
 			rs.close();
 			cs.close();
@@ -308,8 +321,7 @@ public class GestionaMovimientos implements Serializable {
 			mensaje = gestor.getMensaje();
 
 			CallableStatement cs = conex.prepareCall("CALL spMovimientoTransferencia(?,?,?,?,?,?,?,?,?,?,?)");
-			// cs.setInt(1, this.iduunn);
-			cs.setInt(1, 1);
+			cs.setInt(1, this.iduunn);
 			cs.setInt(2, this.iduunndestino);
 			cs.setInt(3, this.idconcepto);
 			cs.setString(4, this.fecha);
@@ -334,6 +346,40 @@ public class GestionaMovimientos implements Serializable {
 		} catch (SQLException ex) {
 			mensaje += ex.getMessage();
 		} catch (NullPointerException ex) {
+			mensaje += ex.getMessage();
+		}
+	}
+	
+	public void eliminarMovimiento() {
+		System.out.println("eliminarMovimiento");
+		ResultSet rs;
+		try {
+			GestionBaseDeDatos gestor = new GestionBaseDeDatos();
+			Connection conex = gestor.conectar();
+			mensaje = gestor.getMensaje();
+			CallableStatement cs = conex.prepareCall("CALL spMovimientoDelete(?,?)");
+			cs.setInt(1, this.idmovimiento);
+			cs.registerOutParameter(2, Types.INTEGER, "var_codigo");
+			
+			System.out.println("QUERY:"+cs.toString());
+			
+			rs = cs.executeQuery();
+
+			if (rs.next()) {
+				// Forma de acceder: rs.getString(1)+"/"+rs.getString("var_codigo");
+				mensaje += "Se elimino Correctamente.<br>Su código de movimiento era: " + rs.getString("var_codigo");
+			} else {
+				mensaje += "Ocurrio un error al eliminar el movimiento.";
+			}
+			rs.close();
+			cs.close();
+			conex.close();
+
+		} catch (SQLException ex) {
+			System.out.println("SQLException");
+			mensaje += ex.getMessage();
+		} catch (NullPointerException ex) {
+			System.out.println("NullPointerException");
 			mensaje += ex.getMessage();
 		}
 	}

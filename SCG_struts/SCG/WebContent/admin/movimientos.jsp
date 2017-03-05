@@ -66,59 +66,12 @@
 
 	<div id="wrapper">
 
-		<nav class="navbar-default navbar-static-side" role="navigation">
-		<div class="sidebar-collapse">
-			<ul class="nav metismenu" id="side-menu">
-				<li class="nav-header">
-					<div class="dropdown profile-element">
-						<span> <img alt="image" class="img-circle"
-							src="admin/img/profile_small.jpg" />
-						</span> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
-							class="clear"> <span class="block m-t-xs"> <strong
-									class="font-bold"><s:property value="#session.personal.nombres"/> <s:property value="#session.personal.apellidos"/></strong>
-							</span> <span class="text-muted text-xs block">Administrador <b
-									class="caret"></b></span>
-						</span>
-						</a>
-						<ul class="dropdown-menu animated fadeInRight m-t-xs">
-							<li><a href="profile.jsp">Perfil</a></li>
-							<li class="divider"></li>
-							<li><s:a action="Logout">Cerrar Sesión</s:a></li>
-						</ul>
-					</div>
-					<div class="logo-element">SCG+</div>
-				</li>
-				<li><s:a action="Dashboard"><i
-						class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></s:a>
-				</li>
-				<li class="active"><s:a action="Movimientos"><i class="fa fa-bar-chart-o"></i>
-						<span class="nav-label">Reg. Movimientos</span></s:a></li>
-				<li><s:a action="Transferencias"><i class="fa fa-exchange"></i>
-						<span class="nav-label">Reg. Transferencias</span></s:a></li>
-				<li><s:a action="Gastos"><i class="fa fa-credit-card"></i>
-						<span class="nav-label">Gastos</span></s:a></li>
-			</ul>
-		</div>
-		</nav>
+		<s:set var="menu_left_activo" value="%{'movimientos'}" />
+		<jsp:include page="menu/menu_left.jsp" />
 
 		<div id="page-wrapper" class="gray-bg">
-			<div class="row border-bottom">
-				<nav class="navbar navbar-static-top white-bg" role="navigation"
-					style="margin-bottom: 0">
-				<div class="navbar-header">
-					<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
-						href="#"><i class="fa fa-bars"></i> </a>
-				</div>
-				<ul class="nav navbar-top-links navbar-right">
-					<li><span class="m-r-sm text-muted welcome-message">Bienvenidos
-							al Sistema de Control de Gastos.</span></li>
-					<li><s:a action="Logout"><i class="fa fa-sign-out"></i>
-							Cerrar Sesión
-					</s:a></li>
-				</ul>
-
-				</nav>
-			</div>
+			<jsp:include page="menu/menu_top.jsp" />
+			
 			<div class="row wrapper border-bottom white-bg page-heading">
 				<div class="col-lg-10">
 					<h2>Registrar Movimientos</h2>
@@ -169,7 +122,8 @@
 										<div class="col-sm-6">
 											<label class="col-sm-3 control-label">Concepto</label>
 											<div class="col-sm-9">
-												<select id="cbo_concepto" data-placeholder="Escoga Concepto"
+												${gestiona_concepto.getCombo('cbo_concepto', 'Escoga Concepto')}
+												<!-- <select id="cbo_concepto" data-placeholder="Escoga Concepto"
 													class="chosen-select" style="min-width: 100%" tabindex="2">
 													<option value="">Seleccione</option>
 													<option value="1">Pago de planilla</option>
@@ -183,6 +137,7 @@
 													<option value="6">Movilidad</option>
 													<option value="7">Otros</option>
 												</select>
+												-->
 											</div>
 										</div>
 									</div>
@@ -192,6 +147,8 @@
 										<div class="col-sm-6">
 											<label class="col-sm-3 control-label">Personal</label>
 											<div class="col-sm-9">
+												${gestiona_personal.getCombo('cbo_personal', 'Escoga Personal')}
+												<!-- 
 												<select id="cbo_personal" data-placeholder="Escoga Personal"
 													class="chosen-select" style="min-width: 100%" tabindex="2">
 													<option value="">Seleccione</option>
@@ -199,6 +156,7 @@
 													<option value="2">Geynen Montenegro Cochas</option>
 													<option value="3">Miguel Senmache Bravo</option>
 												</select>
+												-->
 											</div>
 										</div>
 										<div class="col-sm-6">

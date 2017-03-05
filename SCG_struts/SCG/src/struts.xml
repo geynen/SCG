@@ -45,6 +45,48 @@
 				/Vistas/Usuario/logout.jsp
 			</result>
 		</action>
+		<action name="Usuarios" class="controladores.UsuarioAction" method="index">
+			<result name="success">
+				/admin/usuario/index.jsp
+			</result>
+		</action>
+		<action name="ajax_usuarios_listar_all" class="controladores.UsuarioAction" method="getListarAll">
+			<result name="success">
+				/admin/usuario/listar_all.jsp
+			</result>
+		</action>
+		<action name="ajax_usuarios_buscar" class="controladores.UsuarioAction" method="getBuscar">
+			<result name="success">
+				/admin/usuario/buscar.jsp
+			</result>
+		</action>
+		<action name="UsuarioNuevo" class="controladores.UsuarioAction" method="nuevo">
+			<result name="success">
+				/admin/usuario/nuevo.jsp
+			</result>
+		</action>
+		<action name="ajax_usuario_nuevo" class="controladores.UsuarioAction" method="save">
+			<result name="success">
+				/admin/usuario/nuevo_respuesta.jsp
+			</result>
+		</action>
+		<action name="UsuarioActualizar" class="controladores.UsuarioAction" method="actualizar">
+			<result name="success">
+				/admin/usuario/actualizar.jsp
+				<param name="idusuario"></param>
+			</result>
+		</action>
+		<action name="ajax_usuario_actualizar" class="controladores.UsuarioAction" method="update">
+			<result name="success">
+				/admin/usuario/actualizar_respuesta.jsp
+			</result>
+		</action>
+		<action name="ajax_usuario_eliminar" class="controladores.UsuarioAction" method="eliminar">
+			<result name="success">
+				/admin/usuario/eliminar_respuesta.jsp
+				<param name="idusuario"></param>
+			</result>
+		</action>
 		<action name="Dashboard" class="controladores.DashboardAction" method="index">
 			<result name="success">
 				/admin/index.jsp
@@ -78,6 +120,54 @@
 		<action name="ajax_movimiento_nuevo" class="controladores.MovimientoNuevoAction" method="nuevo">
 			<result name="success">
 				/admin/movimientos/nuevo.jsp
+			</result>
+		</action>
+		<action name="ajax_movimiento_eliminar" class="controladores.MovimientosAction" method="eliminar">
+			<result name="success">
+				/admin/movimientos/eliminar_respuesta.jsp
+				<param name="idmovimiento"></param>
+			</result>
+		</action>
+		<action name="Conceptos" class="controladores.ConceptoAction" method="index">
+			<result name="success">
+				/admin/concepto/index.jsp
+			</result>
+		</action>
+		<action name="ajax_conceptos_listar_all" class="controladores.ConceptoAction" method="getListarAll">
+			<result name="success">
+				/admin/concepto/listar_all.jsp
+			</result>
+		</action>
+		<action name="ajax_conceptos_buscar" class="controladores.ConceptoAction" method="getBuscar">
+			<result name="success">
+				/admin/concepto/buscar.jsp
+			</result>
+		</action>
+		<action name="ConceptoNuevo" class="controladores.ConceptoAction" method="nuevo">
+			<result name="success">
+				/admin/concepto/nuevo.jsp
+			</result>
+		</action>
+		<action name="ajax_concepto_nuevo" class="controladores.ConceptoAction" method="save">
+			<result name="success">
+				/admin/concepto/nuevo_respuesta.jsp
+			</result>
+		</action>
+		<action name="ConceptoActualizar" class="controladores.ConceptoAction" method="actualizar">
+			<result name="success">
+				/admin/concepto/actualizar.jsp
+				<param name="idusuario"></param>
+			</result>
+		</action>
+		<action name="ajax_concepto_actualizar" class="controladores.ConceptoAction" method="update">
+			<result name="success">
+				/admin/concepto/actualizar_respuesta.jsp
+			</result>
+		</action>
+		<action name="ajax_concepto_eliminar" class="controladores.ConceptoAction" method="eliminar">
+			<result name="success">
+				/admin/concepto/eliminar_respuesta.jsp
+				<param name="idconcepto"></param>
 			</result>
 		</action>
 	</package>

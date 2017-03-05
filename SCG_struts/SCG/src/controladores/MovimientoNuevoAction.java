@@ -179,7 +179,6 @@ public class MovimientoNuevoAction extends ActionSupport {
 		gestion_mov.setIdtipo(this.idtipo);
 		gestion_mov.setIdconcepto(this.idconcepto);
 		gestion_mov.setFecha(this.fecha);
-		gestion_mov.setIdusuario(this.idusuario);
 		gestion_mov.setIdpersonal(this.idpersonal);
 		gestion_mov.setImporte(this.importe);
 		gestion_mov.setIdtipodocref(this.idtipodocref);
@@ -187,6 +186,7 @@ public class MovimientoNuevoAction extends ActionSupport {
 		gestion_mov.setObservacion(this.observacion);
 		Map session = ActionContext.getContext().getSession();
 		gestion_mov.setIdusuario((int) session.get("idusuario"));
+		gestion_mov.setIduunn((int) session.get("iduunn"));
 		this.mensaje = gestion_mov.getMensaje();
 
 		return SUCCESS;
