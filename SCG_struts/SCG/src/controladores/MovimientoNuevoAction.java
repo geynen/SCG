@@ -191,4 +191,26 @@ public class MovimientoNuevoAction extends ActionSupport {
 
 		return SUCCESS;
 	}
+	
+	public String transferir() {
+		System.out.println("Estoy en transferir");
+		
+		GestionaMovimientos gestion_mov = new GestionaMovimientos();
+		gestion_mov.setCodigo(this.codigo);
+		gestion_mov.setIduunndestino(this.iduunndestino);
+		gestion_mov.setIdtipo(this.idtipo);
+		gestion_mov.setIdconcepto(this.idconcepto);
+		gestion_mov.setFecha(this.fecha);
+		gestion_mov.setIdpersonal(this.idpersonal);
+		gestion_mov.setImporte(this.importe);
+		gestion_mov.setIdtipodocref(this.idtipodocref);
+		gestion_mov.setNrodocref(this.nrodocref);
+		gestion_mov.setObservacion(this.observacion);
+		Map session = ActionContext.getContext().getSession();
+		gestion_mov.setIdusuario((int) session.get("idusuario"));
+		gestion_mov.setIduunn((int) session.get("iduunn"));
+		this.mensaje = gestion_mov.getMensaje();
+
+		return SUCCESS;
+	}
 }

@@ -128,6 +128,11 @@
 				<param name="idmovimiento"></param>
 			</result>
 		</action>
+		<action name="ajax_movimiento_transferir" class="controladores.MovimientoNuevoAction" method="transferir">
+			<result name="success">
+				/admin/movimientos/transferir_respuesta.jsp
+			</result>
+		</action>
 		<action name="Conceptos" class="controladores.ConceptoAction" method="index">
 			<result name="success">
 				/admin/concepto/index.jsp
@@ -168,6 +173,12 @@
 			<result name="success">
 				/admin/concepto/eliminar_respuesta.jsp
 				<param name="idconcepto"></param>
+			</result>
+		</action>
+		<action name="ajax_personal_combo" class="controladores.PersonalAction" method="combo">
+			<result name="success">
+				/admin/personal/combo.jsp
+				<param name="iduunn"></param>
 			</result>
 		</action>
 	</package>

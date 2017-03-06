@@ -80,7 +80,7 @@ public class GestionaParametro implements Serializable {
 		this.idestado = idestado;
 	}
 	
-public ArrayList<GestionaParametro> getById(){
+	public ArrayList<GestionaParametro> getById(){
 		
 		ArrayList<GestionaParametro> arr_obj_parametro = new ArrayList<GestionaParametro>();
 		ResultSet rs;

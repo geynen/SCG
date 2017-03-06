@@ -32,14 +32,14 @@
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
 								<span class="label label-success pull-right">Mensual</span>
-								<h5>Movimientos</h5>
+								<h5>Saldo</h5>
 							</div>
 							<div class="ibox-content">
-								<h1 class="no-margins">40 886,200</h1>
+								<h1 class="no-margins"><s:property value="getText('{0,number,#,##0.00}',{total})"/></h1>
 								<div class="stat-percent font-bold text-success">
-									98% <i class="fa fa-bolt"></i>
+									<s:property value="getText('{0,number,#,##0.00}',{total_porcentaje})"/>% <i class="fa fa-bolt"></i>
 								</div>
-								<small>Total Movimientos</small>
+								<small>Total Saldo</small>
 							</div>
 						</div>
 					</div>
@@ -47,14 +47,14 @@
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
 								<span class="label label-info pull-right">Mensual</span>
-								<h5>Transferencias</h5>
+								<h5>Transferencias Saldo</h5>
 							</div>
 							<div class="ibox-content">
-								<h1 class="no-margins">275,800</h1>
+								<h1 class="no-margins"><s:property value="getText('{0,number,#,##0.00}',{transferencias})"/></h1>
 								<div class="stat-percent font-bold text-info">
-									20% <i class="fa fa-level-up"></i>
+									<s:property value="getText('{0,number,#,##0.00}',{transferencias_porcentaje})"/>% <i class="fa fa-level-up"></i>
 								</div>
-								<small>Total Transferencias</small>
+								<small>Total Transferencias Saldo</small>
 							</div>
 						</div>
 					</div>
@@ -62,29 +62,29 @@
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
 								<span class="label label-primary pull-right">Mensual</span>
-								<h5>Gastos</h5>
+								<h5>Ingresos</h5>
 							</div>
 							<div class="ibox-content">
-								<h1 class="no-margins">106,120</h1>
+								<h1 class="no-margins"><s:property value="getText('{0,number,#,##0.00}',{ingresos})"/></h1>
 								<div class="stat-percent font-bold text-navy">
-									44% <i class="fa fa-level-up"></i>
+									100% <i class="fa fa-level-up"></i>
 								</div>
-								<small>Total Gastos</small>
+								<small>Total Ingresos</small>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-3">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<span class="label label-danger pull-right">Anual</span>
-								<h5>Gastos</h5>
+								<span class="label label-danger pull-right">Mensual</span>
+								<h5>Egresos</h5>
 							</div>
 							<div class="ibox-content">
-								<h1 class="no-margins">80,600</h1>
+								<h1 class="no-margins"><s:property value="getText('{0,number,#,##0.00}',{egresos})"/></h1>
 								<div class="stat-percent font-bold text-danger">
-									38% <i class="fa fa-level-down"></i>
+									<s:property value="getText('{0,number,#,##0.00}',{egresos_porcentaje})"/>% <i class="fa fa-level-down"></i>
 								</div>
-								<small>Total Gastos</small>
+								<small>Total Egresos</small>
 							</div>
 						</div>
 					</div>

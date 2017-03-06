@@ -212,7 +212,9 @@ public class GestionaUnidadNegocio implements Serializable {
 			rs = st.executeQuery("select * from unidadnegocio");
 
 			while (rs.next()) {
-				str_combo += "<option value=\""+rs.getString("iduunn")+"\">"+rs.getString("nombre")+"</option>";
+				if(this.iduunn!=rs.getInt("iduunn")){
+					str_combo += "<option value=\""+rs.getString("iduunn")+"\">"+rs.getString("nombre")+"</option>";
+				}
 			}
 			rs.close();
 			st.close();
