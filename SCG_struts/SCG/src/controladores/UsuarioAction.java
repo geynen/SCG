@@ -150,7 +150,7 @@ public class UsuarioAction extends ActionSupport {
 			session.put("parametro",obj_usuario.getParametro());
 		}else{
 			this.codigo = "FALSE";
-			this.mensaje = "Usuario o Clave incontrrectos.";
+			this.mensaje = "Usuario o Clave incorrectos.";
 		}		
 		
 		return SUCCESS;
