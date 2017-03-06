@@ -101,7 +101,9 @@ public class DashboardAction extends ActionSupport {
 		
 		GestionaDashboard obj_dashboard = new GestionaDashboard();
 		Map session = ActionContext.getContext().getSession();
-		obj_dashboard.setIduunn((int) session.get("iduunn"));
+		if(session.get("iduunn")!=null){
+			obj_dashboard.setIduunn((int) session.get("iduunn"));
+		}
 		GestionaDashboard gestion_dashboard = obj_dashboard.getCantidades();
 		this.ingresos = gestion_dashboard.getIngresos();
 		this.egresos = gestion_dashboard.getEgresos();

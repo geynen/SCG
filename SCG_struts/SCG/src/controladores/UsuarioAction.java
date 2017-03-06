@@ -176,7 +176,9 @@ public class UsuarioAction extends ActionSupport {
 		
 		GestionaUsuario gestion_usuario = new GestionaUsuario();
 		Map session = ActionContext.getContext().getSession();
-		gestion_usuario.setIduunn((int) session.get("iduunn"));
+		if(session.get("iduunn")!=null){
+			gestion_usuario.setIduunn((int) session.get("iduunn"));
+		}
 		this.mensaje = gestion_usuario.getMensaje();
 
 		return SUCCESS;
@@ -188,7 +190,9 @@ public class UsuarioAction extends ActionSupport {
 		GestionaUsuario gestion_usuario = new GestionaUsuario();
 		gestion_usuario.setCodigo(this.codigo);
 		Map session = ActionContext.getContext().getSession();
-		gestion_usuario.setIduunn((int) session.get("iduunn"));
+		if(session.get("iduunn")!=null){
+			gestion_usuario.setIduunn((int) session.get("iduunn"));
+		}
 		this.mensaje = gestion_usuario.getMensaje();
 
 		return SUCCESS;
@@ -212,7 +216,9 @@ public class UsuarioAction extends ActionSupport {
 		gestion_usuario.setLogin(this.login);
 		gestion_usuario.setClave(this.clave);
 		Map session = ActionContext.getContext().getSession();
-		gestion_usuario.setIduunn((int) session.get("iduunn"));
+		if(session.get("iduunn")!=null){
+			gestion_usuario.setIduunn((int) session.get("iduunn"));
+		}
 		this.mensaje = gestion_usuario.getMensaje();
 
 		return SUCCESS;
@@ -246,7 +252,9 @@ public class UsuarioAction extends ActionSupport {
 		gestion_usuario.setLogin(this.login);
 		gestion_usuario.setClave(this.clave);
 		Map session = ActionContext.getContext().getSession();
-		gestion_usuario.setIduunn((int) session.get("iduunn"));
+		if(session.get("iduunn")!=null){
+			gestion_usuario.setIduunn((int) session.get("iduunn"));
+		}
 		this.mensaje = gestion_usuario.getMensaje();
 
 		return SUCCESS;

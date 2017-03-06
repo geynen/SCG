@@ -42,7 +42,7 @@
 			</div>
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-12" id="contenedor_respuesta">
 
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
@@ -63,7 +63,7 @@
 							<div class="ibox-content">
 								<div class="row">
 									<div class="form-group">
-										<div class="col-sm-12" id="contenedor_respuesta">
+										<div class="col-sm-12">
 
 											<div class="input-group">
 												<input type="text" id="txt_buscar" name="txt_buscar" placeholder="Buscar"

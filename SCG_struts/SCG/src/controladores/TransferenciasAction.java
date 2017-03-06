@@ -75,7 +75,9 @@ public class TransferenciasAction extends ActionSupport {
 		gestiona_personal = new GestionaPersonal();
 		gestiona_unidadnegocio = new GestionaUnidadNegocio();
 		Map session = ActionContext.getContext().getSession();
-		gestiona_unidadnegocio.setIduunn((int) session.get("iduunn"));
+		if(session.get("iduunn")!=null){
+			gestiona_unidadnegocio.setIduunn((int) session.get("iduunn"));
+		}
 
 		return SUCCESS;
 	}

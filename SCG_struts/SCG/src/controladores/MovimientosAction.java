@@ -67,7 +67,9 @@ public class MovimientosAction extends ActionSupport {
 		gestiona_concepto = new GestionaConcepto();
 		gestiona_personal = new GestionaPersonal();
 		Map session = ActionContext.getContext().getSession();
-		gestiona_personal.setIduunn((int) session.get("iduunn"));
+		if(session.get("iduunn")!=null){
+			gestiona_personal.setIduunn((int) session.get("iduunn"));
+		}
 		return SUCCESS;
 	}
 	
@@ -76,7 +78,9 @@ public class MovimientosAction extends ActionSupport {
 		
 		GestionaMovimientos gestion_mov = new GestionaMovimientos();
 		Map session = ActionContext.getContext().getSession();
-		gestion_mov.setIduunn((int) session.get("iduunn"));
+		if(session.get("iduunn")!=null){
+			gestion_mov.setIduunn((int) session.get("iduunn"));
+		}
 		this.mensaje = gestion_mov.getMensaje();
 
 		return SUCCESS;
@@ -88,7 +92,9 @@ public class MovimientosAction extends ActionSupport {
 		GestionaMovimientos gestion_mov = new GestionaMovimientos();
 		gestion_mov.setCodigo(this.codigo);
 		Map session = ActionContext.getContext().getSession();
-		gestion_mov.setIduunn((int) session.get("iduunn"));
+		if(session.get("iduunn")!=null){
+			gestion_mov.setIduunn((int) session.get("iduunn"));
+		}
 		this.mensaje = gestion_mov.getMensaje();
 
 		return SUCCESS;
